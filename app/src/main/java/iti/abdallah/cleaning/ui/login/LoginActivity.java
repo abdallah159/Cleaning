@@ -1,8 +1,7 @@
-package iti.abdallah.cleaning.login;
+package iti.abdallah.cleaning.ui.login;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.EditText;
 
 import butterknife.BindView;
@@ -10,14 +9,14 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import iti.abdallah.cleaning.R;
 
-public class LoginActivity extends AppCompatActivity implements LoginView {
+public class LoginActivity extends AppCompatActivity implements LoginContract.MVPView {
 
-    @BindView(R.id.username)
-    EditText username;
-    @BindView(R.id.password)
-    EditText password;
+    @BindView(R.id.usernameET)
+    EditText usernameET;
+    @BindView(R.id.passwordET)
+    EditText passwordET;
 
-    private LoginPresenter loginPresenter;
+    private LoginContract.Presenter loginPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,19 +24,15 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
-        loginPresenter = new LoginPresenterImpl(this);
-
-
+        loginPresenter = new LoginPresenter(this);
     }
 
     @OnClick(R.id.login)
-    public void Login(){
-        String name = username.getText().toString();
-        String pass = password.getText().toString();
-        loginPresenter.validateLoginInfo(name,pass);
-
+    public void Login() {
+        String name = usernameET.getText().toString();
+        String pass = passwordET.getText().toString();
+        loginPresenter.validateLoginInfo(name, pass);
     }
-
 
     @Override
     public void onSuccess() {
