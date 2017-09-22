@@ -1,4 +1,4 @@
-package iti.abdallah.cleaning.ui.login;
+package iti.abdallah.cleaning.ui.signup;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,29 +9,33 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import iti.abdallah.cleaning.R;
 
-public class LoginActivity extends AppCompatActivity implements LoginContract.MVPView {
+public class SignupActivity extends AppCompatActivity implements SignupContract.MVPView {
 
     @BindView(R.id.usernameET)
     EditText usernameET;
     @BindView(R.id.passwordET)
     EditText passwordET;
+    @BindView(R.id.passwordconfimET)
+    EditText confirmPasswordET;
 
-    private LoginContract.Presenter loginPresenter;
+    private SignupContract.Presenter signupPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
 
-        loginPresenter = new LoginPresenter(this);
+        signupPresenter = new SignupPresenter(this);
     }
 
-    @OnClick(R.id.loginBTN)
-    public void Login() {
-        String name = usernameET.getText().toString();
-        String pass = passwordET.getText().toString();
-        loginPresenter.validateLoginInfo(name, pass);
+    @OnClick(R.id.signupBTN)
+    public void SignUp() {
+        String username = usernameET.getText().toString();
+        String password = passwordET.getText().toString();
+        String confirmPassword = confirmPasswordET.getText().toString();
+
+        signupPresenter.validateSignupInfo(username, password, confirmPassword);
     }
 
     @Override
@@ -43,7 +47,6 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.MV
     public void onUserOrPasswordError(String errmsg) {
 
     }
-
 
     @Override
     public void showProgress(boolean showProgress) {

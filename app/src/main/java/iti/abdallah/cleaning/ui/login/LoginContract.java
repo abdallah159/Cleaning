@@ -6,9 +6,7 @@ public interface LoginContract {
 
         void onSuccess();
 
-        void onUserError(String errmsg);
-
-        void onPasswordError(String errmsg);
+       void onUserOrPasswordError(String errmsg);
 
         void showProgress(boolean showProgress);
     }

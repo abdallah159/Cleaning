@@ -32,6 +32,6 @@ public class LoginPresenter implements LoginContract.Presenter, LoginModel.OnLog
     @Override
     public void failed() {
         loginView.showProgress(true);
-        loginView.onUserError("Username or password error");
+        loginView.onUserOrPasswordError("Username or password error");
     }
 }
