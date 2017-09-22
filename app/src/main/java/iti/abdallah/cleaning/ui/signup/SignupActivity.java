@@ -60,5 +60,6 @@ public class SignupActivity extends AppCompatActivity implements SignupContract.
     @Override
     public void showProgress(boolean showProgress) {
 
+
     }
 }
