@@ -1,13 +1,16 @@
 package iti.abdallah.cleaning.ui.login;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import iti.abdallah.cleaning.R;
+import iti.abdallah.cleaning.ui.signup.SignupActivity;
 
 public class LoginActivity extends AppCompatActivity implements LoginContract.MVPView {
 
@@ -25,6 +28,13 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.MV
         ButterKnife.bind(this);
 
         loginPresenter = new LoginPresenter(this);
+    }
+
+    @OnClick(R.id.registerTV)
+    void goToSignup() {
+        Intent i = new Intent(LoginActivity.this, SignupActivity.class);
+        LoginActivity.this.finish();
+        startActivity(i);
     }
 
     @OnClick(R.id.loginBTN)

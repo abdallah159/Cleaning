@@ -4,26 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="iti.abdallah.cleaning.ui.signup.SignupActivity"
+    android:background="@color/ColorPink"
     android:orientation="vertical"
-    android:weightSum="6">
+    android:weightSum="7"
+    tools:context="iti.abdallah.cleaning.ui.signup.SignupActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        android:layout_weight="2">
+        android:layout_gravity="center"
+        android:layout_weight=".75"
+        android:orientation="vertical">
 
-        <ImageView
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@mipmap/ic_launcher"/>
+            android:gravity="center"
+            android:text="Sign Up"
+            android:textSize="25dp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/clean" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="3.5"
         android:orientation="vertical">
 
         <EditText
@@ -33,7 +50,7 @@
             android:background="@drawable/edittextstyle"
             android:gravity="center"
             android:hint="Your name"
-            android:textColorHint="@android:color/darker_gray" />
+            android:textColorHint="@android:color/black" />
 
         <EditText
             android:id="@+id/passwordET"
@@ -44,7 +61,7 @@
             android:gravity="center"
             android:hint="Your Password"
             android:inputType="textPassword"
-            android:textColorHint="@android:color/darker_gray" />
+            android:textColorHint="@android:color/black" />
 
         <EditText
             android:id="@+id/passwordconfimET"
@@ -55,14 +72,31 @@
             android:gravity="center"
             android:hint="Confirm password"
             android:inputType="textPassword"
-            android:textColorHint="@android:color/darker_gray" />
+            android:textColorHint="@android:color/black" />
 
         <Button
             android:id="@+id/signupBTN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="10dp"
             android:text="Sign Up"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight=".5"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/loginTV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Already a member?Login now"
+            android:textColor="#000080" />
     </LinearLayout>
 </LinearLayout>
