@@ -31,12 +31,7 @@ public class SignupActivity extends AppCompatActivity implements SignupContract.
         signupPresenter = new SignupPresenter(this);
     }
 
-    @OnClick(R.id.loginTV)
-    void goToSignup() {
-        Intent i = new Intent(SignupActivity.this, LoginActivity.class);
-        SignupActivity.this.finish();
-        startActivity(i);
-    }
+
 
     @OnClick(R.id.signupBTN)
     public void SignUp() {

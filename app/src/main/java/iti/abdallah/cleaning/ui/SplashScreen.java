@@ -1,11 +1,11 @@
-package iti.abdallah.cleaning;
+package iti.abdallah.cleaning.ui;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import iti.abdallah.cleaning.R;
 import iti.abdallah.cleaning.ui.login.LoginActivity;
 
 public class SplashScreen extends Activity {
