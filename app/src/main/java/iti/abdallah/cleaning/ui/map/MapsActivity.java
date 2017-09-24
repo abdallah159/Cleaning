@@ -29,7 +29,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -49,15 +48,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onMapClick(LatLng latLng) {
 
-                MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.position(latLng);
-                markerOptions.title("Your Place");
-                mMap.clear();
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
-                //user position
-                userPosition = new LatLng(latLng.latitude, latLng.longitude);
-                mMap.addMarker(markerOptions);
-                Log.v(latLng.toString(), "+++++");
+//                MarkerOptions markerOptions = new MarkerOptions();
+//                markerOptions.position(latLng);
+//                markerOptions.title("Your Place");
+//                mMap.clear();
+//                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+//                userPosition = new LatLng(latLng.latitude, latLng.longitude);
+//                mMap.addMarker(markerOptions)
+//                Log.v(latLng.toString(), "+++++");
+            }
+        });
+
+        mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
+            @Override
+            public void onCameraMove() {
+                userPosition = mMap.getCameraPosition().target;
             }
         });
 
@@ -78,7 +83,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 @Override
                 public void onClick(View view) {
 
-                    //Handle order now Button
+                    //Handle (order now) Button
                 }
             });
 
