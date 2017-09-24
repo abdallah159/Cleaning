@@ -2,7 +2,11 @@ package iti.abdallah.cleaning.ui.map;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -12,6 +16,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import iti.abdallah.cleaning.R;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -27,6 +33,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        ButterKnife.bind(this);
     }
 
     @Override
@@ -53,6 +60,32 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Log.v(latLng.toString(), "+++++");
             }
         });
+
+    }
+
+    @OnClick(R.id.continueBTN)
+    public void fillForm() {
+        if (userPosition == null) {
+            Toast.makeText(getApplicationContext(), "Please select location", Toast.LENGTH_SHORT).show();
+        } else {
+            AlertDialog.Builder mBulder = new AlertDialog.Builder(MapsActivity.this);
+            View mView = getLayoutInflater().inflate(R.layout.dialog_form, null);
+
+            EditText fullName = mView.findViewById(R.id.fullnameET);
+            EditText order = mView.findViewById(R.id.orderET);
+            Button orderNow = mView.findViewById(R.id.orderBTN);
+            orderNow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    //Handle order now Button
+                }
+            });
+
+            mBulder.setView(mView);
+            AlertDialog dialog = mBulder.create();
+            dialog.show();
+        }
 
     }
 }
