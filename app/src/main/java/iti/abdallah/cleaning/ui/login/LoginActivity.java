@@ -50,7 +50,6 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.MV
     public void onSuccess() {
         Intent mapIntent = new Intent(LoginActivity.this, MapsActivity.class);
         startActivity(mapIntent);
-
     }
 
     @Override
