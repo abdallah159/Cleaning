@@ -1,7 +1,7 @@
 package iti.abdallah.cleaning.ui.signup;
 
-import iti.abdallah.cleaning.model.signup.SignupModel;
-import iti.abdallah.cleaning.model.signup.SignupModelImpl;
+import iti.abdallah.cleaning.service.model.signup.SignupModel;
+import iti.abdallah.cleaning.service.model.signup.SignupModelImpl;
 
 public class SignupPresenter implements SignupContract.Presenter,SignupModel.OnSignupListener {
 

@@ -1,143 +1,143 @@
 package iti.abdallah.cleaning.ui.map;
 
-import android.content.pm.PackageManager;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.LinearLayout;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import iti.abdallah.cleaning.R;
+import iti.abdallah.cleaning.model.Location;
+import iti.abdallah.cleaning.model.Order;
+import iti.abdallah.cleaning.ui.about.AboutActivity;
+import iti.abdallah.cleaning.ui.about.AboutFragment;
+import iti.abdallah.cleaning.ui.cart.CartFragment;
+import iti.abdallah.cleaning.ui.order.OrderFragment;
+import iti.abdallah.cleaning.ui.order.OrderPaymentFragment;
+import iti.abdallah.cleaning.ui.profile.ProfileActivity;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements OrderPaymentFragment.OnFinishOrder,
+        NavigationView.OnNavigationItemSelectedListener, MapFragment.OnFragmentInteractionListener {
 
-    private GoogleMap mMap;
-    LatLng userPosition;
-
-    private boolean mLocationPermissionGranted;
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+    @BindView(R.id.orderL)
+    LinearLayout orderL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+        setContentView(R.layout.activity_main);
+
         ButterKnife.bind(this);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.nav_container, MapFragment.newInstance());
+        transaction.commit();
     }
 
     @Override
-    public void onMapReady(final GoogleMap googleMap) {
-        mMap = googleMap;
-        updateLocationUI();
-
-        mMap.getUiSettings().setZoomControlsEnabled(true);
-
-        // Move the camera to  Damita
-        LatLng damita = new LatLng(31.419024, 31.814678);
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(damita, 18));
-
-        //Take user position when he click map
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {}
-        });
-
-        mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
-            @Override
-            public void onCameraMove() {
-                userPosition = mMap.getCameraPosition().target;
-            }
-        });
-
-    }
-
-    private void updateLocationUI() {
-        if (mMap == null) {
-            return;
-        }
-        try {
-            if (mLocationPermissionGranted) {
-                mMap.setMyLocationEnabled(true);
-                mMap.getUiSettings().setMyLocationButtonEnabled(true);
-            } else {
-                mMap.setMyLocationEnabled(false);
-                mMap.getUiSettings().setMyLocationButtonEnabled(false);
-                getLocationPermission();
-            }
-        } catch (SecurityException e)  {
-            Log.e("Exception: %s", e.getMessage());
-        }
-    }
-
-    private void getLocationPermission() {
-        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                android.Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-            mLocationPermissionGranted = true;
-            updateLocationUI();
+    public void onBackPressed() {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStack();
+        } else if (orderL.getVisibility() != View.GONE) {
+            orderL.setVisibility(View.GONE);
         } else {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
-                    MY_PERMISSIONS_REQUEST_LOCATION);
+            super.onBackPressed();
         }
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String permissions[],
-                                           @NonNull int[] grantResults) {
-        mLocationPermissionGranted = false;
-        switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_LOCATION: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    mLocationPermissionGranted = true;
-                }
-            }
-        }
-        updateLocationUI();
+    public void onFinishOrder(Order order) {
+        orderL.setVisibility(View.GONE);
+        Log.d("order on finish", order.toString());
     }
 
-    @OnClick(R.id.washMeTV)
-    public void fillForm() {
-        if (userPosition == null) {
-            Toast.makeText(getApplicationContext(), "Please select location", Toast.LENGTH_SHORT).show();
-        } else {
-            Log.d("position", userPosition.toString());
-            AlertDialog.Builder mBulder = new AlertDialog.Builder(MapsActivity.this);
-            View mView = getLayoutInflater().inflate(R.layout.dialog_form, null);
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        int id = item.getItemId();
 
-            EditText fullName = mView.findViewById(R.id.fullnameET);
-            EditText order = mView.findViewById(R.id.orderET);
-            Button orderNow = mView.findViewById(R.id.orderBTN);
-            orderNow.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+        if (id == R.id.nav_camera) {
+            openMap();
+        } else if (id == R.id.nav_gallery) {
+            openCart();
+        } else if (id == R.id.nav_slideshow) {
+            openAbout();
+        } else if (id == R.id.nav_manage) {
+            openProfile();
+        } else if(id == R.id.nav_exit) {
+            exitApp();
+        }
 
-                    //Handle (order now) Button
-                }
-            });
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
 
-            mBulder.setView(mView);
-            AlertDialog dialog = mBulder.create();
-            dialog.show();
+    private void exitApp() {
+        //ToDo exit app
+    }
+
+    private void openProfile() {
+        startActivity(new Intent(this, ProfileActivity.class));
+    }
+
+    private void openAbout() {
+        startActivity(new Intent(this, AboutActivity.class));
+    }
+
+    private void openCart() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.nav_container, CartFragment.newInstance())
+                .commit();
+    }
+
+    private void openMap() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.nav_container, MapFragment.newInstance())
+                .commit();
+    }
+
+    @Override
+    public void onAddOrderClick(LatLng userPosition) {
+        if (userPosition != null) {
+            Order order = new Order();
+            order.setLocation(new Location(userPosition));
+
+            getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.container, OrderFragment.newInstance(order));
+            transaction.commit();
+
+            orderL.setVisibility(View.VISIBLE);
         }
     }
 }

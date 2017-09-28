@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -13,9 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.login.LoginActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
-
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity android:name=".ui.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,9 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".ui.signup.SignupActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
+        <activity
+            android:name=".ui.signup.SignupActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
@@ -33,9 +32,10 @@
 
         <activity
             android:name=".ui.map.MapsActivity"
-            android:label="@string/title_activity_maps">
-
-        </activity>
+            android:label="@string/title_activity_maps"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.profile.ProfileActivity"/>
+        <activity android:name=".ui.about.AboutActivity"/>
     </application>
 
 </manifest>

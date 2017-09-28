@@ -1,4 +1,4 @@
-package iti.abdallah.cleaning.model.signup;
+package iti.abdallah.cleaning.service.model.signup;
 
 public interface SignupModel {
 

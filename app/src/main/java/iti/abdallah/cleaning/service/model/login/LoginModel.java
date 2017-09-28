@@ -1,4 +1,4 @@
-package iti.abdallah.cleaning.model.login;
+package iti.abdallah.cleaning.service.model.login;
 
 public interface LoginModel {
 

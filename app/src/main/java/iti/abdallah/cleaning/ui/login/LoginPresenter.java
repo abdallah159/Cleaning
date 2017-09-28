@@ -1,7 +1,7 @@
 package iti.abdallah.cleaning.ui.login;
 
-import iti.abdallah.cleaning.model.login.LoginModel;
-import iti.abdallah.cleaning.model.login.LoginModelImpl;
+import iti.abdallah.cleaning.service.model.login.LoginModel;
+import iti.abdallah.cleaning.service.model.login.LoginModelImpl;
 
 
 public class LoginPresenter implements LoginContract.Presenter, LoginModel.OnLoginListener {

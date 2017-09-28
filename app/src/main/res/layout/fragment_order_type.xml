@@ -1,0 +1,118 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#8fa5c7"
+    android:orientation="vertical"
+
+    tools:context="iti.abdallah.cleaning.ui.order.OrderTypeFragment">
+
+    <RelativeLayout
+        android:id="@+id/headerL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:elevation="8dp"
+        android:padding="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="Type of service"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="8dp">
+
+            <View
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:background="@drawable/bg_steps" />
+
+            <View
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/bg_steps" />
+
+            <View
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/bg_steps_empty" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/fastTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="Fast"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp"
+            android:background="@color/whiteColor"/>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="#b4d6ea"/>
+
+        <TextView
+            android:id="@+id/normalTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="Normal"
+            android:textSize="20sp"
+            android:background="@color/colorAccent"
+            android:textColor="@color/whiteColor"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/footerL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp">
+
+        <LinearLayout
+            android:id="@+id/nextL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Next"
+                android:textColor="#f9f9f9"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_vertical"
+                android:padding="4dp"
+                android:src="@drawable/ic_arrow" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>
